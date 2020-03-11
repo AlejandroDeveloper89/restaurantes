@@ -17,6 +17,7 @@ class CreateComentariosTable extends Migration
             $table->bigIncrements('id');
             $table->longText('comentario');
             $table->integer('estrella');
+            $table->tinyInteger('aprovado')->default(0);
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id');

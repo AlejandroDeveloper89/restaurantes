@@ -17,7 +17,7 @@ class CreateRestaurantesTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre', 100);
             $table->string('direccion', 100);
-            $table->string('telefono', 10);
+            $table->string('telefono', 30);
             $table->string('horario', 100);
             $table->timestamps();
         });

@@ -11,8 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function() {
+    return Redirect::to('/restaurante', 302); 
 });
 
+
 Route::resource('/restaurante', 'RestauranteController');
+Route::resource('/comentario', 'ComentarioController');
+
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');

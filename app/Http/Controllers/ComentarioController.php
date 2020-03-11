@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-//Librerias
+
 use Illuminate\Http\Request;
-//Modelos
-use App\Restaurante;
+
 use App\Comentario;
 
-class RestauranteController extends Controller
+class ComentarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +15,7 @@ class RestauranteController extends Controller
      */
     public function index()
     {
-        $restaurantes = Restaurante::all();
-        if(request()->segments()[0] === 'api') {
-            return response()->json(compact('restaurantes'));
-        }
-
-        return view('welcome', compact('restaurantes'));
+        //
     }
 
     /**
@@ -42,7 +36,21 @@ class RestauranteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'comentario' => 'required',
+            'restaurante_id' => 'required'
+        ], [
+            'comentario.required' => 'Ingresa un comentario'
+        ]);
+        
+        $comentario = new Comentario();
+        $comentario->comentario = $request->input('comentario');
+        $comentario->estrella = rand(1, 5);
+        $comentario->user_id = \Auth::id();
+        $comentario->restaurante_id = $request->input('restaurante_id');
+        $comentario->save();
+        
+        return redirect()->back()->with(['status' => 'Pendiente a aprovación']);
     }
 
     /**
@@ -53,14 +61,7 @@ class RestauranteController extends Controller
      */
     public function show($id)
     {
-        $restaurante = Restaurante::findOrFail($id);
-        $comentarios = Comentario::select('comentarios.id', 'comentarios.comentario', 'comentarios.estrella', 'comentarios.created_at', 'users.nombre', 'users.apellido')
-                ->join('users', 'users.id', '=', 'comentarios.user_id')
-                ->where('comentarios.restaurante_id', $restaurante->id)
-                ->where('comentarios.aprovado', 1)
-                ->orderBy('created_at', 'asc')
-                ->get();
-        return view('restaurante.show', compact('restaurante', 'comentarios'));
+        //
     }
 
     /**
