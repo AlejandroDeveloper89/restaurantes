@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 //Modelos
 use App\Restaurante;
 use App\Comentario;
+use App\User;
+use App\Rol;
 
 class RestauranteController extends Controller
 {
@@ -53,6 +55,10 @@ class RestauranteController extends Controller
      */
     public function show($id)
     {
+        // $rol = Rol::find(2);
+        // dd($rol->usuarios);
+        // $user = User::find(2);
+        // dd($user->rol->rol);
         $restaurante = Restaurante::findOrFail($id);
         $comentarios = Comentario::select('comentarios.id', 'comentarios.comentario', 'comentarios.estrella', 'comentarios.created_at', 'users.nombre', 'users.apellido')
                 ->join('users', 'users.id', '=', 'comentarios.user_id')

@@ -7,4 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Rol extends Model
 {
     protected $table = 'roles';
+
+
+    public function usuarios()
+    {           //tiene muchos
+        return $this->hasMany(User::class);
+    }
+
+
 }
+
+

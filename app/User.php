@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comentario::class);
     }
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class);
+    }
 }
