@@ -92,6 +92,20 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .button {
+  /* background-color: #4CAF50; */
+  background-color: Transparent;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
         </style>
     </head>
     <body class="bg">
@@ -99,7 +113,10 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                        <button type="submit" class="button">Cerrar sesión</button>
+                        </form>
                     @else
                         <a href="{{ route('login') }}">Ingresar</a>
 

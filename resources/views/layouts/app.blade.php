@@ -40,13 +40,15 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Ingresar</a>
-                            </li>
-                            @if (Route::has('register'))
+                            @if(Request::segment(1) !== 'admin')
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">Registro</a>
+                                    <a class="nav-link" href="{{ route('login') }}">Ingresar</a>
                                 </li>
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">Registro</a>
+                                    </li>
+                                @endif
                             @endif
                         @else
                             <li class="nav-item dropdown">
