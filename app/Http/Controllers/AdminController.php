@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Comentario;
 use App\Restaurante;
 
+use App\Exports\RestaurantsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class AdminController extends Controller
 {
     public function index()
@@ -43,5 +46,10 @@ class AdminController extends Controller
         $restaurante->horario = $request->horario;
         $restaurante->save();
         return redirect()->back()->with('status', 'success');
+    }
+
+    public function download()
+    {
+        return Excel::download(new RestaurantsExport, 'restaurantes.xlsx');
     }
 }
